@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 82
+project.xcworkspace
+xcuserdata
+ychirico.mode1v3
+ychirico.mode2v3
+ychirico.pbxuser
+
+END
