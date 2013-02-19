@@ -10,8 +10,6 @@
 #define __proto__CMaillage__
 
 #include <iostream>
-#include <list>
-#include <vector>
 #include "VBO.h"
 
 using namespace std;
@@ -37,7 +35,7 @@ public:
     
     CMaillage(int xsize, int ysize);
     
-    void AddSommet(vector<float> sommet);
+    void AddSommet(float* sommet);
     
     void FillVBO(VBO& vb);
     

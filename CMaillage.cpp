@@ -80,7 +80,7 @@ void CMaillage::FillVBO(VBO& vb)
 //  Date:  01/02/13
 //  MAJ:
 // --------------------------------------------------------------------------------
-void CMaillage::AddSommet(vector<float> sommet)
+void CMaillage::AddSommet(float* sommet)
 {
     for(int i = 0; i < 8 ; i++){
         m_sommets[i+m_cur_sommets] = sommet[i];

@@ -15,7 +15,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <vector>
 using namespace std;
 
 #include "glutfcts.h"
@@ -24,9 +23,6 @@ using namespace std;
 #include "textures.h"
 
 #include "CMaillage.h"
-
-
-
 
 
 
@@ -453,8 +449,7 @@ void  sub_display()
 //  Date:  01/02/13
 //  MAJ:
 // --------------------------------------------------------------------------------
-
-bool discretise(int M, int N, float R, float r, VBO& v)
+bool discretise_torus(int M, int N, float R, float r, VBO& v)
 {
 
     CMaillage theMaillage(M+1,N+1);
@@ -482,21 +477,21 @@ bool discretise(int M, int N, float R, float r, VBO& v)
             float xn = yu * zv - yv * zu;
             float yn =  zu * xv - zv * xu;
             float zn = xu * yv - xv * yu;
-            
             float nm = sqrt(xn*xn+yn*yn+zn*zn);
-            vector<float> cur_sommet;
+            
+            float cur_sommet[8];
         
             // position x y z
-            cur_sommet.push_back(x);
-            cur_sommet.push_back(y);
-            cur_sommet.push_back(z);
+            cur_sommet[0]=x;
+            cur_sommet[1]=y;
+            cur_sommet[2]=z;
             // normal x y z
-            cur_sommet.push_back((xn/nm));
-            cur_sommet.push_back((yn/nm));
-            cur_sommet.push_back((zn/nm));
+            cur_sommet[3]=xn/nm;
+            cur_sommet[4]=yn/nm;
+            cur_sommet[5]=zn/nm;
             // texture coord s t
-            cur_sommet.push_back((float)j/N);
-            cur_sommet.push_back((float)i/M);
+            cur_sommet[6]=(float)j/N;
+            cur_sommet[7]=(float)i/M;
             
             theMaillage.AddSommet(cur_sommet);
         }
@@ -506,6 +501,44 @@ bool discretise(int M, int N, float R, float r, VBO& v)
     return 0;
 }
 
+
+// --------------------------------------------------------------------------------
+//  Fonction: discretise
+//  Cette fonction calcule le maillage de taille M × N et le place dans le VBO passe en reference.
+//  Par:   Jean Meyblum et Pierre Rouveyrol
+//  Date:  01/02/13
+//  MAJ:
+// --------------------------------------------------------------------------------
+bool discretise_flat(int M, int N, VBO& v)
+{
+    
+    CMaillage theMaillage(M,N);
+    for(int i=0; i<M; i++)
+    {
+        
+        for(int j=0; j<N; j++)
+        {            
+            float cur_sommet[8];
+            
+            // position x y z
+            cur_sommet[0]=j;
+            cur_sommet[1]=0;
+            cur_sommet[2]=i;
+            // normal x y z
+            cur_sommet[3]=0.0;
+            cur_sommet[4]=1.0;
+            cur_sommet[5]=0.0;
+            // texture coord s t
+            cur_sommet[6]=(float)j/(N-1);
+            cur_sommet[7]=(float)i/(M-1);
+            
+            theMaillage.AddSommet(cur_sommet);
+        }
+        
+    }
+    theMaillage.FillVBO(v);
+    return 0;
+}
 
 
 // --------------------------------------------------------------------------------
@@ -547,7 +580,8 @@ void initialize_glut(int main_w, int main_h, int sub_h)
     
 	glutSetWindow(main_wnd_id);
     
-    discretise(4, 4, 12, 4, TheVBO);
+    //discretise_torus(4, 4, 12, 4, TheVBO);
+    discretise_flat(32, 32, TheVBO);
 
 }
 
