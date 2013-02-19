@@ -15,14 +15,13 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-using namespace std;
 
 #include "glutfcts.h"
 #include "point3d.h"
 #include "diagnostic.h"
 #include "textures.h"
-
 #include "CMaillage.h"
+#include "shaders.h"
 
 
 
@@ -31,6 +30,7 @@ char	WND_NAME[] = "proto";
 int main_wnd_id;
 int sub_wnd_id;
 VBO TheVBO;
+
 
 static int sub_win_heigth(32);
 
@@ -49,16 +49,15 @@ static int mot = 0;
 #define ROT	2
 #define MVZ	3
 
-
-
 static GLfloat red1[]    = { 0.7, 0.2, 0.2, 1.0 };
 static GLfloat green1[]    = { 0.2, 0.7, 0.0, 1.0 };
 static GLfloat blue1[]    = { 0.2, 0.2, 0.7, 1.0 };
 
 bool texLinearFiltering = true;
 bool Phong = true;
-GLfloat shininess=0.25;
+GLfloat shininess=4;
 GLuint curTexId = 0;
+float temps = 0;
 
 // --------------------------------------------------------------------------------
 //  Fonction: draw_string
@@ -125,13 +124,13 @@ void keyboard(unsigned char key, int x, int y)
     
 	switch(key)
 	{   case 'w': //shininess x 2. Till 32.0
-            if(shininess<32)
+            if(shininess<512)
                 shininess = shininess*2;
             glMaterialf(GL_FRONT,GL_SHININESS,shininess);
             break;
             
         case 's': //shininess x 0.5. Till 0.25
-            if(shininess>0.25)
+            if(shininess>1)
                 shininess = shininess*0.5;
             glMaterialf(GL_FRONT,GL_SHININESS,shininess);
             break;
@@ -311,6 +310,7 @@ void reshape(int w, int h)
 // --------------------------------------------------------------------------------
 void idle()
 {
+    temps += 0.01;
     glutSetWindow(main_wnd_id);
     glutPostRedisplay();
     glutSetWindow(sub_wnd_id);
@@ -368,13 +368,18 @@ void display()
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
+    glUseProgram(prog_phong);
+    shader_setuniform(prog_phong, "temps", temps);
     TheVBO.Draw();
+
+
+    //glUseProgram(prog_water);
     
     glPopMatrix();
 	glutSwapBuffers();
     //printOpenGLError;
     
-}
+}	
 
 
 
@@ -580,8 +585,10 @@ void initialize_glut(int main_w, int main_h, int sub_h)
     
 	glutSetWindow(main_wnd_id);
     
-    //discretise_torus(4, 4, 12, 4, TheVBO);
-    discretise_flat(32, 32, TheVBO);
+    discretise_torus(32, 32, 12, 4, TheVBO);
+    //discretise_flat(16, 16, TheVBO);
+    
+    shader_initialize("./");
 
 }
 
@@ -604,13 +611,13 @@ void init_geometry()
     glEnable(GL_DEPTH_TEST);
     
     GLfloat LightAmbient[]=		{ 0.5f, 0.5f, 0.5f, 1.0f };
-	GLfloat LightDiffuse[]=		{ 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat LightSpecular[]=	{ 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat LightPosition1[]=	{ 0.0f, 0.0f, 30.0f, 1.0f };
+	GLfloat LightDiffuse[]=		{ 0.5f, 0.5f, 0.5f, 1.0f };
+	GLfloat LightSpecular[]=	{ 0.9f, 0.9f, 0.9f, 1.0f };
+	GLfloat LightPosition1[]=	{ 10.0f, 10.0f, 10.0f, 1.0f };
     
-    GLfloat mat_ambient[]=		{ 0.0f, 0.0f, 0.0f, 1.0f };
+    GLfloat mat_ambient[]=		{ 0.3f, 0.3f, 0.3f, 1.0f };
     GLfloat mat_diffuse[]=		{ 0.3f, 0.3f, 0.3f, 1.0f };
-    GLfloat mat_specular[]=     { 0.8f, 0.8f, 0.8f, 1.0f };
+    GLfloat mat_specular[]=     { 1.0f, 1.0f, 1.0f, 1.0f };
     
     glMaterialfv(GL_FRONT,GL_AMBIENT,mat_ambient);
     glMaterialfv(GL_FRONT,GL_DIFFUSE,mat_diffuse);
