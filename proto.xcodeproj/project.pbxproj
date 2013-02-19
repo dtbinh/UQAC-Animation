@@ -17,8 +17,9 @@
 		B1258FF30DB0547E00B8B041 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1258FF20DB0547E00B8B041 /* GLUT.framework */; };
 		B1804FAE0F58E4B400627108 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1804FAD0F58E4B400627108 /* Carbon.framework */; };
 		B180512F0F58EB7B00627108 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B180512E0F58EB7B00627108 /* CoreFoundation.framework */; };
-		ECA3A9D616B9EDD700268F94 /* CMaillage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECA3A9D416B9EDD700268F94 /* CMaillage.cpp */; };
-		ECA61E1B16BA08A400D98476 /* VBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECA61E1A16BA08A400D98476 /* VBO.cpp */; };
+		DCCCDCCB16D3F5DF00C2196E /* CMaillage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCCCDCCA16D3F5DF00C2196E /* CMaillage.cpp */; };
+		DCCCDCCD16D3F5EA00C2196E /* VBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCCCDCCC16D3F5EA00C2196E /* VBO.cpp */; };
+		DCCCDCCF16D3F5F800C2196E /* shaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCCCDCCE16D3F5F800C2196E /* shaders.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,10 +52,12 @@
 		B1804FAD0F58E4B400627108 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		B180512E0F58EB7B00627108 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		B1E5593D14DCD9E80014F49B /* proto */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = proto; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECA3A9D416B9EDD700268F94 /* CMaillage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMaillage.cpp; sourceTree = "<group>"; };
-		ECA3A9D516B9EDD700268F94 /* CMaillage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaillage.h; sourceTree = "<group>"; };
-		ECA61E1816BA089E00D98476 /* VBO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VBO.h; sourceTree = "<group>"; };
-		ECA61E1A16BA08A400D98476 /* VBO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VBO.cpp; sourceTree = "<group>"; };
+		DCCCDCC716D3F5C200C2196E /* CMaillage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMaillage.h; path = src/CMaillage.h; sourceTree = "<group>"; };
+		DCCCDCC816D3F5CF00C2196E /* VBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VBO.h; path = src/VBO.h; sourceTree = "<group>"; };
+		DCCCDCC916D3F5DA00C2196E /* shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shaders.h; path = src/shaders.h; sourceTree = "<group>"; };
+		DCCCDCCA16D3F5DF00C2196E /* CMaillage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMaillage.cpp; path = src/CMaillage.cpp; sourceTree = "<group>"; };
+		DCCCDCCC16D3F5EA00C2196E /* VBO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VBO.cpp; path = src/VBO.cpp; sourceTree = "<group>"; };
+		DCCCDCCE16D3F5F800C2196E /* shaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shaders.cpp; path = src/shaders.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,11 +94,12 @@
 			isa = PBXGroup;
 			children = (
 				B108FE061173A8AE00D9F8FE /* diagnostic.cpp */,
-				ECA3A9D416B9EDD700268F94 /* CMaillage.cpp */,
+				DCCCDCCA16D3F5DF00C2196E /* CMaillage.cpp */,
 				B108FE081173A8AE00D9F8FE /* glutfcts.cpp */,
 				B108FE0C1173A8AE00D9F8FE /* point3d.cpp */,
-				ECA61E1A16BA08A400D98476 /* VBO.cpp */,
+				DCCCDCCC16D3F5EA00C2196E /* VBO.cpp */,
 				B108FE101173A8AE00D9F8FE /* textfile.cpp */,
+				DCCCDCCE16D3F5F800C2196E /* shaders.cpp */,
 				B108FE121173A8AF00D9F8FE /* textures.cpp */,
 				B108FE141173A8AF00D9F8FE /* main.cpp */,
 			);
@@ -105,10 +109,11 @@
 		B114B4AE0DAEF76900996B1D /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				ECA3A9D516B9EDD700268F94 /* CMaillage.h */,
+				DCCCDCC716D3F5C200C2196E /* CMaillage.h */,
 				B17124FB144889A100B2C411 /* glutfcts.h */,
-				ECA61E1816BA089E00D98476 /* VBO.h */,
+				DCCCDCC816D3F5CF00C2196E /* VBO.h */,
 				B108FE071173A8AE00D9F8FE /* diagnostic.h */,
+				DCCCDCC916D3F5DA00C2196E /* shaders.h */,
 				B108FE0D1173A8AE00D9F8FE /* point3d.h */,
 				B108FE111173A8AF00D9F8FE /* textfile.h */,
 				B108FE131173A8AF00D9F8FE /* textures.h */,
@@ -182,8 +187,9 @@
 				B108FE1A1173A8AF00D9F8FE /* textfile.cpp in Sources */,
 				B108FE1B1173A8AF00D9F8FE /* textures.cpp in Sources */,
 				B108FE1C1173A8AF00D9F8FE /* main.cpp in Sources */,
-				ECA3A9D616B9EDD700268F94 /* CMaillage.cpp in Sources */,
-				ECA61E1B16BA08A400D98476 /* VBO.cpp in Sources */,
+				DCCCDCCB16D3F5DF00C2196E /* CMaillage.cpp in Sources */,
+				DCCCDCCD16D3F5EA00C2196E /* VBO.cpp in Sources */,
+				DCCCDCCF16D3F5F800C2196E /* shaders.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
