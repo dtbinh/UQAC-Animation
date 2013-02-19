@@ -337,7 +337,7 @@ void display()
     glClearColor(0.8f, 0.8f, 0.8f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    printOpenGLError;
+    //printOpenGLError;
     
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -376,12 +376,9 @@ void display()
     
     glPopMatrix();
 	glutSwapBuffers();
-    printOpenGLError;
+    //printOpenGLError;
     
 }
-
-
-
 
 
 
@@ -460,7 +457,7 @@ void  sub_display()
 bool discretise(int M, int N, float R, float r, VBO& v)
 {
 
-    CMaillage theMaillage(M,N);
+    CMaillage theMaillage(M+1,N+1);
     for(int i=0; i<M+1; i++)
     {
         
@@ -505,10 +502,6 @@ bool discretise(int M, int N, float R, float r, VBO& v)
         }
 
     }
-    
-    //On remplit une liste de triangles avec le contenu de The Matrix
-
-    
     theMaillage.FillVBO(v);
     return 0;
 }
@@ -554,7 +547,7 @@ void initialize_glut(int main_w, int main_h, int sub_h)
     
 	glutSetWindow(main_wnd_id);
     
-    discretise(64, 64, 12, 4, TheVBO);
+    discretise(4, 4, 12, 4, TheVBO);
 
 }
 

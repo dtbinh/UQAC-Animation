@@ -9,6 +9,14 @@
 #include <fstream>
 #include "VBO.h"
 
+
+// --------------------------------------------------------------------------------
+//  Fonction: discretise
+//  Transforme la classe VBO en VBO openGL.
+//  Par:   Jean Meyblum et Pierre Rouveyrol
+//  Date:  01/02/13
+//  MAJ:
+// --------------------------------------------------------------------------------
 void VBO::SetBuffers(GLfloat* vb, unsigned int nbvtx, GLuint* vi, unsigned int nbi){
     mp_nb_indices = nbi;
     glGenBuffers(2, mp_buffer_id );
@@ -23,6 +31,13 @@ void VBO::SetBuffers(GLfloat* vb, unsigned int nbvtx, GLuint* vi, unsigned int n
 }
 
 
+// --------------------------------------------------------------------------------
+//  Fonction: discretise
+//  Le fonction openGL fait afficher le VBO.
+//  Par:   Jean Meyblum et Pierre Rouveyrol
+//  Date:  01/02/13
+//  MAJ:
+// --------------------------------------------------------------------------------
 void VBO::Draw()
 {
 
